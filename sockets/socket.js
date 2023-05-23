@@ -1,14 +1,12 @@
-const io = require('../index');
+const { io } = require('../index');
 
 io.on('connection', (client) => {
-    console.log('cliente conectado');
+    console.log('Cliente conectado');
     client.on('disconnect', () => {
-        console.log('cliente desconectado');
+        console.log('Cliente desconectado');
     });
-
-    client.on('mensaje', (mensaje) => {
-        console.log(mensaje);
-        io.emit('mensaje', { admin: 'Nuevo mensaje' });
-        client.emit('mensaje', { client: 'Nuevo mensaje' });
+    client.on('message', (payload) => {
+        console.log('message', payload);
+        io.emit('message', payload);
     });
 });
