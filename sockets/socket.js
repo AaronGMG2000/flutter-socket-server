@@ -9,4 +9,10 @@ io.on('connection', (client) => {
         console.log('message', payload);
         io.emit('message', payload);
     });
+
+    client.on('emitir-mensaje', (payload) => {
+        // io.emit('nuevo-mensaje', payload); // emite a todos
+        console.log('payload', payload);
+        client.broadcast.emit('nuevo-mensaje', payload); // emite a todos menos al que lo emitió
+    });
 });
